@@ -1,7 +1,9 @@
 {% extends "_base.html" %}
+{% load common_tags %}
 
 {% block title %}Home{% endblock %}
 {% block header %}Welcome!{% endblock %}
 {% block main %}
   <p>Get ready to laugh!</p>
+  {% random_joke %}
 {% endblock %}
