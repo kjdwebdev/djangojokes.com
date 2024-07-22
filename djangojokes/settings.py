@@ -81,8 +81,12 @@ WSGI_APPLICATION = 'djangojokes.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'jokes',
+        'USER': 'postgres',
+        'PASSWORD': 'Yag3hebi',
+        'HOST': 'localhost',
+        'PORT': 5432
     }
 }
 
@@ -122,9 +126,11 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
 
 STATIC_URL = '/static/'
+#STATIC_URL = '/foo/'
 
 STATICFILES_DIRS = [
     BASE_DIR / 'static',
+    #BASE_DIR / 'bar',
 ]
 
 # Default primary key field type
