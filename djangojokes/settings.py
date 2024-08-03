@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     # Third-party apps
     'crispy_forms',
     'crispy_bootstrap5',
+    "django_static_fontawesome",
 
     #Local apps
     'common.apps.CommonConfig',
