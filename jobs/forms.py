@@ -30,6 +30,7 @@ class JobApplicationForm(forms.ModelForm):
     cover_letter = forms.CharField(
         widget=forms.Textarea(attrs={'cols': '75', 'rows': '5'})
     )
+    
     verify = forms.BooleanField(
         label = 'I certify that the information I have provided is true.',
         validators=[validate_checked]
@@ -40,7 +41,7 @@ class JobApplicationForm(forms.ModelForm):
         fields = (
             'first_name', 'last_name', 'email', 'website', 'employment_type',
             'start_date', 'available_days', 'hourly_wage',
-            'cover_letter', 'verify', 'job')
+            'cover_letter', 'resume', 'verify', 'job')
         widgets = {
             'first_name': forms.TextInput(attrs={'autofocus': True}),
             'website': forms.TextInput(
@@ -55,7 +56,8 @@ class JobApplicationForm(forms.ModelForm):
             'hourly_wage': forms.NumberInput(
                 attrs = {'min':'10.00', 'max':'100.00', 'step':'.25'}
             ),
-            'cover_letter': forms.Textarea(attrs={'cols': '100', 'rows': '5'})
+            'cover_letter': forms.Textarea(attrs={'cols': '100', 'rows': '5'}),
+            'resume': forms.FileInput(attrs={'accept':'application/pdf'})
         }
         error_messages = {
             'start_date': {
