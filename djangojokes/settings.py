@@ -187,6 +187,8 @@ STATICFILES_DIRS = [
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+MESSAGE_LEVEL = 10  # DEBUG
+
 # BOTTOM OF settings.py
 if os.environ.get('ENVIRONMENT') != 'production':
     from .local_settings import *
