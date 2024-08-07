@@ -1,3 +1,4 @@
+from django.conf import settings
 from django.db import models
 from django.urls import reverse
 
@@ -31,7 +32,10 @@ class Category(models.Model):
 
 class Joke(models.Model):
     question = models.TextField(max_length=200)
-    answer = models.TextField(max_length=100, blank=True)
+    answer = models.TextField(max_length=100)
+    user = models.ForeignKey(
+        settings.AUTH_USER_MODEL, on_delete=models.PROTECT
+    )
     category = models.ForeignKey(Category, on_delete=models.PROTECT)
     tags = models.ManyToManyField('Tag', blank=True)
     created = models.DateTimeField(auto_now_add=True)
