@@ -1,5 +1,4 @@
 {% extends "_base.html" %}
-{% load static %}
 
 {% block javascript %}
   <script>
@@ -7,6 +6,7 @@
   </script>
   <script src="{% static 'js/jokes.js' %}"></script>
 {% endblock %}
+
 {% block title %}Joke{% endblock %}
 {% block main %}
   <div class="card border-primary m-auto mb-3 text-center"
@@ -17,7 +17,7 @@
     </div>
     <div class="card-footer">
       <div class="border-bottom border-faded pb-2">
-        <strong>Category:</strong> {{ joke.category.category }}<br>
+        <strong>Category: </strong>{{ joke.category.category }}<br>
         {% for tag in joke.tags.all %}
           <span class="badge rounded-pill bg-secondary">{{ tag.tag }}</span>
         {% endfor %}
