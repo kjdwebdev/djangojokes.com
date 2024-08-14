@@ -48,6 +48,7 @@ class JokeUpdateView(SuccessMessageMixin, UserPassesTestMixin, UpdateView):
         obj = self.get_object()
         return self.request.user == obj.user
 
+
 def vote(request, slug):
     user = request.user # The logged-in user (or AnonymousUser).
     joke = Joke.objects.get(slug=slug) # The joke instance.
