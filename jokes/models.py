@@ -34,10 +34,11 @@ class Joke(models.Model):
     question = models.TextField(max_length=200)
     answer = models.TextField(max_length=100)
     user = models.ForeignKey(
-        settings.AUTH_USER_MODEL, on_delete=models.PROTECT
+        settings.AUTH_USER_MODEL, on_delete=models.PROTECT,
+        related_name='jokes'
     )
-    category = models.ForeignKey(Category, on_delete=models.PROTECT)
-    tags = models.ManyToManyField('Tag', blank=True)
+    category = models.ForeignKey(Category, on_delete=models.PROTECT, related_name='jokes')
+    tags = models.ManyToManyField('Tag', blank=True, related_name='jokes')
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
     slug = models.SlugField(
@@ -80,3 +81,23 @@ class Tag(models.Model):
     
     class Meta:
         ordering = ['tag']
+
+class JokeVote(models.Model):
+    user = models.ForeignKey(
+        settings.AUTH_USER_MODEL, on_delete=models.CASCADE,
+        related_name='jokevotes'
+    )
+    joke = models.ForeignKey(
+        Joke, on_delete=models.CASCADE,
+        related_name='jokevotes'
+    )
+    vote = models.SmallIntegerField()
+    created = models.DateTimeField(auto_now_add=True)
+    updated = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        constraints = [
+            models.UniqueConstraint(
+                fields=['user', 'joke'], name='one_vote_per_user_per_joke'
+            )
+        ]
